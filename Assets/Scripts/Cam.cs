@@ -4,9 +4,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class Cam {
-    private Camera cam { get; private set; }
-    private Vector2 offset { get; private set; }
-    private Vector2 scale { get; private set; }
+    public Camera cam { get; private set; }
+    public Vector2 offset { get; private set; }
+    public Vector2 scale { get; private set; }
     
     public Cam (Camera cam, Vector2 offset, Vector2 scale) {
         this.cam = cam;
@@ -20,7 +20,7 @@ public class Cam {
     }
 
     public bool isOnscreen() {
-
+        return false;
     }
 
     public void SetOffset(Vector2 offset) { this.offset = offset; }
@@ -32,7 +32,7 @@ public class Cam {
         SetView();
     }
 
-    private void SetView() {
+    public void SetView() {
         
     }
 }
