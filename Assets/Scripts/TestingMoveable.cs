@@ -9,6 +9,7 @@ public class TestingMoveable : MonoBehaviour
     public float jumpPower = 10.0f;
     public Vector3 footPosition = new Vector3(0f, -0.5f, 0f);
     public GameObject camera3p;
+    public GameObject bullet;
 
     private Rigidbody rigidBody;
 
@@ -25,6 +26,19 @@ public class TestingMoveable : MonoBehaviour
         Walking();
         Jumping();
         Turning();
+        Shooting();
+    }
+
+    private void Shooting()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject shot = Instantiate(bullet);
+            shot.transform.position = transform.position + transform.forward;
+            shot.transform.rotation = transform.rotation;
+
+            shot.GetComponent<TestBullet>().inertia = rigidBody.velocity;
+        }
     }
 
     private void Turning()
