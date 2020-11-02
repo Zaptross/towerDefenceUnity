@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -31,24 +32,24 @@ public class BotController : MonoBehaviour
     {
         PositionEntity[] positions = GameManager.instance.GetObjectPositions();
 
-        // Logic here, comparing positions of all entities to the vision cone points 
+        // Compare positions of all entities to the vision cone points
         // to determine if they are within the bounds created by the vision cone points
         // -> vision cone points will be points relative to the transform's position
 
         return new PositionEntity[0]; // Return an gameobject array
     }
     /// <summary>
-    /// Returns array of vague sound directions relative to this bot's forward direction.
+    /// Returns array of 6 sound directions relative to this bot's forward direction. Magnitude of vector represents intensity of sounds heard.
     /// </summary>
     /// <returns></returns>
-    protected Vector3[] DetectSoundInDirections() // "Hear"
+    protected SoundSet DetectSoundInDirections() // "Hear"
     {
         Vector3[] soundPositions = GameManager.instance.GetSoundPositions();
 
         // Return array of sound positions abstracted to Left, Right, Forward, Back, Up Down
         // -> Directions should be relative to this transform's forward direction.
-
-        return new Vector3[0]; // Return an empty vector3 array
+        
+        return new SoundSet(Enumerable.Repeat<Vector3>(Vector3.zero, 6).ToArray()); // Return an array of 6 Zero vectors, representing no sounds heard
     }
 
     // Action Functions
@@ -76,4 +77,6 @@ public class BotController : MonoBehaviour
     {
         Debug.Log("Shoot Not Implemented");
     }
+
+    // Status functions
 }
